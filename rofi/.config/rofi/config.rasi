@@ -1,0 +1,5 @@
+configuration {
+	modi: "run,drun,ssh,";
+	combi-modi: "run,drun,ssh";
+	}
+@theme "nord"

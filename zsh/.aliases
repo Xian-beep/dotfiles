@@ -1,0 +1,43 @@
+### ZSH ALIASES ###
+
+# Change TERM to xterm-256color for this session
+alias sshxterm="export TERM=xterm-256color"
+
+# rsync
+#Copy files with progress indicator
+#Usage: cpr [FOLDER/FILE] [DESTINATION]
+#Adding "/" to the end of the source file copies the contents of the folder
+#ARGS: --hard links --acls --xattrs
+alias cpr="rsync -ah --progress --log-file=/home/k/Documents/rsync_log"
+
+# Check VPN with mullvad
+# curls after the am.i.mullvad conenction check
+alias vpn="curl https://am.i.mullvad.net/connected"
+
+# Sends output to ix.io pastebin
+alias pastebin="curl -F 'f:1=<-' ix.io"
+
+# Convenient file download shortcut
+alias cdl='curl --remote-name-all --fail --remote-time --location'
+
+# Downloads everything from ~/scripts/download.txt
+alias cdlt='~/scripts/download.sh'
+
+# Changing/making/removing directory
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+function d () {
+	if [[ -n $1 ]]; then
+		dirs "$0"
+	else
+		dirs -v | head -10
+	fi
+}
+compdef _dirs d

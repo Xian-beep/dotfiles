@@ -1,0 +1,214 @@
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+## DISPLAY ##
+
+# Set Screen orientation and resolution
+exec --no-startup-id xrandr --output DP-2 --primary --mode 2560x1440 --rate 165 --output DP-1 --mode 1920x1080 --rate 60 --left-of DP-2 --output DP-5 --mode 1920x1080 --rate 60 --right-of DP-2
+
+## VISUALS ##
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:inconsolata medium 11
+
+# Borders
+default_border pixel 3
+default_floating_border pixel 3
+hide_edge_borders smart
+
+# Gaps
+gaps outer 0
+gaps inner 5
+smart_gaps on
+
+# Titlebar Colors
+client.focused				#8FBCBB #8FBCBB #2e3440	#8FBCBB
+client.focused_inactive		#3b4252	#3b4252	#d8dee9
+client.unfocused			#2e3440	#2e3440	#d8dee9
+client.urgent				#bf616a	#bf616a	#d8dee9
+
+## PROGRAMS ##
+
+# Starts steam without steamwebhelper. Lightweight, but you can't uninstall games, use the store, and some other stuff.
+exec --no-startup-id steam -silent -no-browser
+
+# Set background with feh
+exec --no-startup-id sh ~/.fehbg
+
+# Set keyboard on startup
+exec setxkbmap -layout se
+
+## HOTKEYS ##
+
+# Set mod key
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi
+bindsym $mod+d exec --no-startup-id rofi -show run -sidebar-mode
+
+# start passmenu (password manager)
+bindsym $mod+Shift+d exec --no-startup-id passmenu -fn  'source code pro-9.5' -nb '#2e3440' -nf '#eceff4' -sb '#5e81ac' -sf '#eceff4'
+
+# Open YT link with MPV (needs xclip)
+bindsym $mod+m exec mpv `xclip -o`
+
+# Uses scrot + xclip to select an area to screenshot
+bindsym --release $mod+p exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
+
+# Uses scrot + xclip to select an area to screenshot
+bindsym --release $mod+Shift+p exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+
+# mouse focus
+focus_follows_mouse yes
+
+# Focus on window activation
+focus_on_window_activation urgent	
+
+# Put in scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show first scratchpad
+bindsym $mod+minus scratchpad show
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+V split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Defines monitors
+set $monitor_center DP-2
+set $monitor_left DP-1
+set $monitor_right DP-5
+
+# Automatic back and forth
+workspace_auto_back_and_forth yes
+
+# Assigns workspaces to monitors
+workspace $chat output $monitor_left
+workspace $term output $monitor_center
+workspace $www output $monitor_right
+workspace $game output $monitor_center
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $chat "chat"
+set $term "term"
+set $www "www"
+set $game "game"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $chat
+bindsym $mod+2 workspace $term
+bindsym $mod+3 workspace $www
+bindsym $mod+4 workspace $game
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $chat
+bindsym $mod+Shift+2 move container to workspace $term
+bindsym $mod+Shift+3 move container to workspace $www
+bindsym $mod+Shift+4 move container to workspace $game
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym l resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh

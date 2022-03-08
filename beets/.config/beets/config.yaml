@@ -1,0 +1,68 @@
+# Music Directory
+directory: ~/Network/nfs/music/files
+
+# Library Database
+library: ~/Network/nfs/music/databases/library.db
+
+plugins: the fetchart embedart scrub extrafiles lastgenre replaygain
+
+# Defines move or copy during import.
+import:
+  move: yes
+  timid: yes
+  languages: en
+  autotag: yes
+
+# Per disc numbering changes the numbering, eg instead of song 1 on disc 2 being song 11, it will be "song 1 on disk 2".
+per_disc_numbering: yes
+
+# Threaded operation
+threaded: yes
+
+# Fodler and file formatting.
+paths:
+  default: %the{$albumartist}/$album%aunique{} (%upper{$original_year}) [%upper{$albumtype}] [%upper{$media}] [%upper{$format}] [%upper{$catalognum}]/$disc-$track - $title ($bitrate)
+  singleton: "#Non-Album/$artist/$title"
+  comp: "#Compilations/%the{$albumartist}/$album%aunique{} (%upper{$original_year}) [%upper{$albumtype}] [%upper{$media}] [%upper{$format}] [%upper{$catalognum}]/$disc-$track - $title ($bitrate)"
+
+# Sets the minimum width and maximum deviation from a square. Sources are from left to right.
+fetchart:
+  midwidth: 400
+  enforce_ratio: 10px
+  sources: filesystem itunes amazon albumart coverart lastfm wikipedia google
+
+extrafiles:
+  patterns:
+    log:
+      - '*.log'
+    cue:
+      - '*.cue'
+    artworkdir:
+      - '[sS]cans/'
+      - '[aA]rtwork/'
+      - '-scans/'
+      - '[aA]rt/'
+  paths:
+    artworkdir: $albumpath/artwork
+    cue: $albumpath/$album
+    log: $albumpath/$album
+
+embedart:
+  auto: yes
+
+lastgenre:
+  count: 3
+
+replaygain:
+  backend: ffmpeg
+
+ui:
+  color: yes
+  colors:
+    text_success: green
+    text_warning: yellow
+    text_error: red
+    text_highlight: red
+    text_highlight_minor: lightgray
+    action_default: turquoise
+    action: blue

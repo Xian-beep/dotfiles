@@ -1,0 +1,7 @@
+# Automatically adjust document to full width
+set adjust-open width
+
+# Set title to filename
+set window-title-basename true
+
+set selection-clipboard clipboard

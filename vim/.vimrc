@@ -7,25 +7,18 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Command must be before plugs
 call plug#begin()
-
-" Plugins
-	
-	"NERDTree
+    "General
 	Plug 'scrooloose/nerdtree'
-
-	"Vim Airline
-	Plug 'vim-airline/vim-airline'
-
-	"Vim Airline Themes
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'ervandew/supertab'
+	"C#
+    Plug 'OmniSharp/omnisharp-vim'
+	" Theme
+    Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	
-	"Nord Theme
 	Plug 'arcticicestudio/nord-vim'
-	
-
-" Command must be below plugs
+    
 call plug#end()
 
 " Vim Options
@@ -39,7 +32,7 @@ call plug#end()
 	" Sets the shifting to 4
 	set shiftwidth=4
 	" Converst from tab to spaces
-	"set expandtab
+	set expandtab
 	" Autoindent
 	set autoindent
 	" The number of screenlines above and below cursor
@@ -56,17 +49,33 @@ call plug#end()
 	set undofile
 	" Set colorscheme
 	colorscheme nord
-	" Makes the background dark
-	"set background=dark
 	" Incremental Search
 	set incsearch
+	
+" Keybinds
+	
+    " Scrolloff toggle with \zz
+	nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+    " Split movement
+    nnoremap <C-J> <C-W><C-J>
+    nnoremap <C-K> <C-W><C-K>
+    nnoremap <C-L> <C-W><C-L>
+    nnoremap <C-H> <C-W><C-H>
+    " Nerd Tree Toggle
+    nnoremap <C-t> :NERDTreeToggle<CR>
+    " Goto definitions for different file types.
+    autocmd FileType cs nmap <silent> gd :OmniSharpGotoDefinition<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+    autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
 
-" Plug Settings
-
-	" NERDTree
-		" Toggle Hotkey
-		nnoremap <C-t> :NERDTreeToggle<CR>
-		" Exit Vim if NERDTree is the only window left.
+" Stuff
+    " Exit Vim if NERDTree is the only window left.
 		autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
-		
+
+    " How tab completion behaves woth OmniSharp
+    autocmd FileType cs let g:SuperTabDefaultCompletionType = 'context'
+    autocmd FileType cs let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+    autocmd FileType cs let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+    autocmd FileType cs let g:SuperTabClosePreviewOnPopupClose = 1

@@ -31,7 +31,7 @@ feed-sort-order unreadarticlecount-asc
 article-sort-order date-dsc
 
 # Max Items, max articles kept
-max-items 200
+max-items 1000
 
 # Color
 color info default default reverse

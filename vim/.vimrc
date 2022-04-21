@@ -51,6 +51,8 @@ call plug#end()
 	colorscheme nord
 	" Incremental Search
 	set incsearch
+    " Set term size
+    set termwinsize=10x0
 	
 " Keybinds
 	
@@ -73,9 +75,14 @@ call plug#end()
     " Exit Vim if NERDTree is the only window left.
 		autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
-
+    
+    " Open term below all splits
+    cabbrev bterm bo term
+    " How tab behaves while picking auto complete 
+    let g:SuperTabClosePreviewOnPopupClose = 1
+    let g:SuperTabDefaultCompletionType = "<c-n>"
     " How tab completion behaves woth OmniSharp
     autocmd FileType cs let g:SuperTabDefaultCompletionType = 'context'
     autocmd FileType cs let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
     autocmd FileType cs let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-    autocmd FileType cs let g:SuperTabClosePreviewOnPopupClose = 1
+    

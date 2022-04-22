@@ -8,14 +8,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-    "General
+	"General
 	Plug 'scrooloose/nerdtree'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'ervandew/supertab'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'ervandew/supertab'
 	"C#
-    Plug 'OmniSharp/omnisharp-vim'
+	Plug 'OmniSharp/omnisharp-vim'
 	" Theme
-    Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'arcticicestudio/nord-vim'
     
@@ -32,7 +32,7 @@ call plug#end()
 	" Sets the shifting to 4
 	set shiftwidth=4
 	" Converst from tab to spaces
-	set expandtab
+	"set expandtab
 	" Autoindent
 	set autoindent
 	" The number of screenlines above and below cursor
@@ -51,8 +51,8 @@ call plug#end()
 	colorscheme nord
 	" Incremental Search
 	set incsearch
-    " Set term size
-    set termwinsize=10x0
+	" Set term size
+	set termwinsize=10x0
 	
 " Keybinds
 	

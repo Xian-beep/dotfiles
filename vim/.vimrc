@@ -18,7 +18,6 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'arcticicestudio/nord-vim'
-    
 call plug#end()
 
 " Vim Options
@@ -72,10 +71,10 @@ call plug#end()
     autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
 
 " Stuff
-    " Exit Vim if NERDTree is the only window left.
-		autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
     
+	" Exit Vim if NERDTree is the only window left.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
     " Open term below all splits
     cabbrev bterm bo term
     " How tab behaves while picking auto complete 
